@@ -1,5 +1,6 @@
 package com.contractapi.entity;
 
+import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 @TableName("contracts")
@@ -10,6 +11,7 @@ public class Contract {
   private String title;
   private String content;
   private String status;
+  private LocalDateTime signedAt;
   private String signers;
 
   public Long getId() { return id; }
@@ -24,6 +26,8 @@ public class Contract {
   public void setContent(String content) { this.content = content; }
   public String getStatus() { return status; }
   public void setStatus(String status) { this.status = status; }
+  public LocalDateTime getSignedAt() { return signedAt; }
+  public void setSignedAt(LocalDateTime signedAt) { this.signedAt = signedAt; }
   public String getSigners() { return signers; }
   public void setSigners(String signers) { this.signers = signers; }
 }

@@ -3,9 +3,11 @@ package com.contractapi.service;
 import java.util.ArrayList;
 import java.util.List;
 import com.contractapi.constants.ContractStatus;
+import com.contractapi.constants.ErrorCode;
 import com.contractapi.dto.GenerateContractRequest;
 import com.contractapi.entity.Contract;
 import com.contractapi.entity.ContractTemplate;
+import com.contractapi.exception.ApiException;
 import com.contractapi.utils.TemplateRenderer;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +36,13 @@ public class ContractService {
     return contract;
   }
 
+  public Contract getContract(Long id) {
+    return contracts.stream().filter(item -> item.getId().equals(id)).findFirst()
+        .orElseThrow(() -> new ApiException(ErrorCode.NOT_FOUND, "合同不存在: " + id));
+  }
+
   public Contract updateStatus(Long id, ContractStatus status) {
-    Contract contract = contracts.stream().filter(item -> item.getId().equals(id)).findFirst().orElseThrow();
+    Contract contract = getContract(id);
     contract.setStatus(status.name());
     return contract;
   }
