@@ -1,15 +1,20 @@
 package com.contractapi.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import java.time.LocalDateTime;
 
 @TableName("contracts")
 public class Contract {
+  @TableId(type = IdType.AUTO)
   private Long id;
   private Long userId;
   private Long templateId;
   private String title;
   private String content;
   private String status;
+  private LocalDateTime signedAt;
   private String signers;
 
   public Long getId() { return id; }
@@ -24,6 +29,8 @@ public class Contract {
   public void setContent(String content) { this.content = content; }
   public String getStatus() { return status; }
   public void setStatus(String status) { this.status = status; }
+  public LocalDateTime getSignedAt() { return signedAt; }
+  public void setSignedAt(LocalDateTime signedAt) { this.signedAt = signedAt; }
   public String getSigners() { return signers; }
   public void setSigners(String signers) { this.signers = signers; }
 }
